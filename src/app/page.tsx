@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Github, Linkedin, Mail, Underline } from "lucide-react";
 import { projects } from "@/data/projects";
+import { experiences } from "@/data/experiences";
 
 export default function Portfolio() {
   const aboutRef = useRef<HTMLDivElement | null>(null);
@@ -25,6 +26,12 @@ export default function Portfolio() {
     day: "bg-gradient-to-b from-sky-200 via-sky-100 to-amber-100 text-gray-800",
     sunset: "bg-gradient-to-b from-pink-300 via-orange-200 to-purple-300 text-gray-900",
     night: "bg-gradient-to-b from-slate-900 via-slate-800 to-sky-900 text-gray-100",
+  };
+
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const toggleExpand = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
   };
 
   const handleDiveIn = () => {
@@ -216,96 +223,36 @@ export default function Portfolio() {
         <h2 className="text-3xl font-bold text-center mb-12">👣 Experience</h2>
 
         <div className="relative max-w-5xl mx-auto">
-          {/* Central vertical line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-amber-500"></div>
+          <div className="absolute left-1/2 md:left-1/2 sm:left-6 transform -translate-x-1/2 md:h-full h-full border-l-2 border-amber-500"></div>
 
           <div className="space-y-12">
-            {/* Easley-Dunn */}
-            <div className="md:flex md:justify-start md:items-start relative group">
-              <div className="md:w-1/2 md:pr-8 relative z-10">
-                <div className="bg-white/70 dark:bg-slate-800/70 rounded-2xl shadow-md p-4 transition-all duration-300 group-hover:p-6 group-hover:shadow-xl">
-                  <h3 className="text-xl font-semibold">Easley-Dunn Productions, Inc. – Software Engineer</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Los Angeles, CA | Feb 2025 – Present</p>
-                  <ul className="mt-2 space-y-1 list-disc list-inside text-gray-700 dark:text-gray-200 max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-300">
-                    <li>Implemented backend systems and gameplay in Unity, integrating APIs and ensuring reliability across distributed components.</li>
-                    <li>Led feature development and performance optimization, debugging critical issues to improve scalability of production systems.</li>
-                    <li>Optimized memory usage and frame rates, ensuring a smoother user experience.</li>
-                  </ul>
+            {experiences.map((exp, i) => (
+              <div
+                key={i}
+                className={`flex flex-col md:flex-row ${
+                  exp.align === "right" ? "md:justify-end" : "md:justify-start"
+                } relative group`}
+              >
+                <div className="w-full md:w-1/2 md:pr-8 md:pl-8 relative z-10">
+                  <div
+                    className="bg-white/70 dark:bg-slate-800/70 rounded-2xl shadow-md p-4 transition-all duration-300 group-hover:p-6 group-hover:shadow-xl cursor-pointer"
+                    onClick={() => toggleExpand(i)}
+                  >
+                    <h3 className="text-xl font-semibold">{exp.title}</h3>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">{exp.location}</p>
+                    <ul
+                      className={`mt-2 space-y-1 list-disc list-inside text-gray-700 dark:text-gray-200 overflow-hidden transition-all duration-300 ${
+                        expandedIndex === i ? "max-h-96" : "max-h-0 md:group-hover:max-h-96"
+                      }`}
+                    >
+                      {exp.bullets.map((b, idx) => (
+                        <li key={idx}>{b}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div className="md:w-1/2"></div>
-            </div>
-
-            {/* RiskSpan */}
-            <div className="md:flex md:justify-end md:items-start relative group">
-              <div className="md:w-1/2"></div>
-              <div className="md:w-1/2 md:pl-8 relative z-10">
-                <div className="bg-white/70 dark:bg-slate-800/70 rounded-2xl shadow-md p-4 transition-all duration-300 group-hover:p-6 group-hover:shadow-xl">
-                  <h3 className="text-xl font-semibold">RiskSpan – AI Engineer Intern</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Arlington, VA | Oct 2024 – Dec 2024</p>
-                  <ul className="mt-2 space-y-1 list-disc list-inside text-gray-700 dark:text-gray-200 max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-300">
-                    <li>Built Generative AI models (GANs, VAEs) to create synthetic financial datasets, improving data diversity and model accuracy.</li>
-                    <li>Optimized models via hyperparameter tuning, feature selection, and bias mitigation, improving predictive accuracy.</li>
-                    <li>Developed ETL pipelines for preprocessing and validating financial datasets.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Reliance Jio */}
-            <div className="md:flex md:justify-start md:items-start relative group">
-              <div className="md:w-1/2 md:pr-8 relative z-10">
-                <div className="bg-white/70 dark:bg-slate-800/70 rounded-2xl shadow-md p-4 transition-all duration-300 group-hover:p-6 group-hover:shadow-xl">
-                  <h3 className="text-xl font-semibold">Reliance Jio – Software Development Engineer</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Mumbai, India | Aug 2021 – May 2023</p>
-                  <ul className="mt-2 space-y-1 list-disc list-inside text-gray-700 dark:text-gray-200 max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-300">
-                    <li>Performed thorough testing on mobile and web applications, collaborating with developers to identify and resolve bugs, improving usability and user experience.</li>
-                    <li>Supported backend development of an internal data analytics tool.</li>
-                  </ul>
-                </div>
-              </div>
-              <div className="md:w-1/2"></div>
-            </div>
-
-            {/* IMT Atlantique */}
-            <div className="md:flex md:justify-end md:items-start relative group">
-              <div className="md:w-1/2"></div>
-              <div className="md:w-1/2 md:pl-8 relative z-10">
-                <div className="bg-white/70 dark:bg-slate-800/70 rounded-2xl shadow-md p-4 transition-all duration-300 group-hover:p-6 group-hover:shadow-xl">
-                  <h3 className="text-xl font-semibold">IMT Atlantique – AI Research Intern</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Nantes, France | Jun 2020 – Jul 2020</p>
-                  <ul className="mt-2 space-y-1 list-disc list-inside text-gray-700 dark:text-gray-200 max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-300">
-                    <li>Developed RNN and LSTM-based prediction models for solar energy power production, reducing errors by 50%.</li>
-                    <li>
-                      Find my work{' '}
-                      <a
-                        href="https://github.com/pearlpatel207/Estimation-of-Electricity-Production-from-Photovoltaic-Panels"
-                        className="text-amber-500 underline hover:text-amber-600 transition-colors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        here
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* VJTI */}
-            <div className="md:flex md:justify-start md:items-start relative group">
-              <div className="md:w-1/2 md:pr-8 relative z-10">
-                <div className="bg-white/70 dark:bg-slate-800/70 rounded-2xl shadow-md p-4 transition-all duration-300 group-hover:p-6 group-hover:shadow-xl">
-                  <h3 className="text-xl font-semibold">Blockchain & AI Lab, VJTI Mumbai – Research Intern</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">Mumbai, India | Nov 2019 – May 2020</p>
-                  <ul className="mt-2 space-y-1 list-disc list-inside text-gray-700 dark:text-gray-200 max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-300">
-                    <li>Engineered Deepfake detection models using CNN-based architectures, improving accuracy.</li>
-                    <li>Built efficient video data pipelines for high-dimensional inputs, improving detection performance.</li>
-                  </ul>
-                </div>
-              </div>
-              <div className="md:w-1/2"></div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
