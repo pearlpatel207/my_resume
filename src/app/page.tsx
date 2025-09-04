@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Github, Linkedin, Mail, Underline } from "lucide-react";
 import { projects } from "@/data/projects";
-import { experiences } from "@/data/experiences";
+import ExperienceTimeline from "@/components/ExperienceTimeline";
 
 export default function Portfolio() {
   const aboutRef = useRef<HTMLDivElement | null>(null);
@@ -26,12 +26,6 @@ export default function Portfolio() {
     day: "bg-gradient-to-b from-sky-200 via-sky-100 to-amber-100 text-gray-800",
     sunset: "bg-gradient-to-b from-pink-300 via-orange-200 to-purple-300 text-gray-900",
     night: "bg-gradient-to-b from-slate-900 via-slate-800 to-sky-900 text-gray-100",
-  };
-
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const toggleExpand = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
   };
 
   const handleDiveIn = () => {
@@ -219,44 +213,8 @@ export default function Portfolio() {
       </section>
 
       {/* EXPERIENCE - Interactive Timeline */}
-      <section id="experience" className="py-20 px-6">
-        <h2 className="text-3xl font-bold text-center mb-12">👣 Experience</h2>
-
-        <div className="relative max-w-5xl mx-auto">
-          <div className="absolute left-1/2 md:left-1/2 sm:left-6 transform -translate-x-1/2 md:h-full h-full border-l-2 border-amber-500"></div>
-
-          <div className="space-y-12">
-            {experiences.map((exp, i) => (
-              <div
-                key={i}
-                className={`flex flex-col md:flex-row ${
-                  exp.align === "right" ? "md:justify-end" : "md:justify-start"
-                } relative group`}
-              >
-                <div className="w-full md:w-1/2 md:pr-8 md:pl-8 relative z-10">
-                  <div
-                    className="bg-white/70 dark:bg-slate-800/70 rounded-2xl shadow-md p-4 transition-all duration-300 group-hover:p-6 group-hover:shadow-xl cursor-pointer"
-                    onClick={() => toggleExpand(i)}
-                  >
-                    <h3 className="text-xl font-semibold">{exp.title}</h3>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm">{exp.location}</p>
-                    <ul
-                      className={`mt-2 space-y-1 list-disc list-inside text-gray-700 dark:text-gray-200 overflow-hidden transition-all duration-300 ${
-                        expandedIndex === i ? "max-h-96" : "max-h-0 md:group-hover:max-h-96"
-                      }`}
-                    >
-                      {exp.bullets.map((b, idx) => (
-                        <li key={idx}>{b}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <ExperienceTimeline />
+      
       {/* PROJECTS */}
       <section className="py-20 px-6">
       <h2 className="text-3xl font-bold text-center mb-4">🏖️ Side Quests</h2>
