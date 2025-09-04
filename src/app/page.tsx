@@ -16,7 +16,16 @@ export default function Portfolio() {
   const [current, setCurrent] = useState(0);
   const [activeTab, setActiveTab] = useState("All");
 
-  const [theme, setTheme] = useState("day");
+  type Theme = 'sunrise' | 'day' | 'sunset' | 'night';
+
+  const [theme, setTheme] = useState<Theme>('day');
+
+  const themeClasses: Record<Theme, string> = {
+    sunrise: "bg-gradient-to-b from-orange-200 via-pink-200 to-sky-200 text-gray-800",
+    day: "bg-gradient-to-b from-sky-200 via-sky-100 to-amber-100 text-gray-800",
+    sunset: "bg-gradient-to-b from-pink-300 via-orange-200 to-purple-300 text-gray-900",
+    night: "bg-gradient-to-b from-slate-900 via-slate-800 to-sky-900 text-gray-100",
+  };
 
   const handleDiveIn = () => {
     aboutRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -52,13 +61,6 @@ export default function Portfolio() {
     else if (hour >= 18 && hour < 21) setTheme("sunset");
     else setTheme("night");
   }, []);
-
-  const themeClasses = {
-    sunrise: "bg-gradient-to-b from-orange-200 via-pink-200 to-sky-200 text-gray-800",
-    day: "bg-gradient-to-b from-sky-200 via-sky-100 to-amber-100 text-gray-800",
-    sunset: "bg-gradient-to-b from-pink-300 via-orange-200 to-purple-300 text-gray-900",
-    night: "bg-gradient-to-b from-slate-900 via-slate-800 to-sky-900 text-gray-100",
-  };
 
   const waveColors = {
     sunrise: "#FDBA74",
