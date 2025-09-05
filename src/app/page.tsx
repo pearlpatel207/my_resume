@@ -212,6 +212,38 @@ export default function Portfolio() {
         </section>
       </section>
 
+      {/* EDUCATION */}
+      <section id="education" className="py-20 px-6 max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl font-bold mb-6">🎓 Education</h2>
+
+        <div className="space-y-8 text-left">
+          {/* USC */}
+          <div className="bg-white/70 dark:bg-slate-800/70 rounded-2xl shadow-md p-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
+              <h3 className="text-xl font-semibold">University of Southern California</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Los Angeles, CA</p>
+            </div>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Master of Science in Computer Science
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">June 2023 – December 2024</p>
+          </div>
+
+          {/* Mumbai Univ */}
+          <div className="bg-white/70 dark:bg-slate-800/70 rounded-2xl shadow-md p-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
+              <h3 className="text-xl font-semibold">University of Mumbai</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Mumbai, India</p>
+            </div>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Bachelor of Engineering in Computer Engineering
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">August 2017 – June 2021</p>
+          </div>
+        </div>
+      </section>
+
+
       {/* EXPERIENCE - Interactive Timeline */}
       <ExperienceTimeline />
       
