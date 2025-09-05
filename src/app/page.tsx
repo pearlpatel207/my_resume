@@ -279,7 +279,7 @@ export default function Portfolio() {
         <p className="text-center mb-8 text-gray-700 dark:text-gray-300">
           You can find more on my {" "}
           <a
-            href="https://scholar.google.com/citations?user=YOUR-SCHOLAR-ID"
+            href="https://scholar.google.com/citations?hl=en&user=UolAykkAAAAJ"
             target="_blank"
             rel="noopener noreferrer"
             className="text-amber-500 underline hover:text-amber-600"
