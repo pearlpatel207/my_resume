@@ -177,6 +177,7 @@ export default function Portfolio() {
           <p className="text-gray-700 dark:text-gray-200">
             Software Engineer @ Easley-Dunn | Working on backend systems, AI/ML projects, and scalable applications ✨
           </p>
+          <p>Based in Los Angeles, CA ⭐️🏙️</p>
         </div>
 
         {/* Fun Facts + Professional Bits */}
