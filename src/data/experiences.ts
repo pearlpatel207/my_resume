@@ -12,6 +12,15 @@ export interface Bullet {
   
   export const experiences: Experience[] = [
     {
+      title: "Ayzenberg Group – AI Engineer",
+      location: "Los Angeles, CA | Nov 2025 – Present",
+      bullets: [
+        { text: "Developed LLM-powered applications using Retrieval-Augmented Generation (RAG) pipelines, improving answer accuracy and reducing hallucinated citations through grounded web data." },
+        { text: "Built and scaled ML pipelines and evaluation frameworks for model training, inference, and performance monitoring." },
+      ],
+      align: "right",
+    },
+    {
       title: "Easley-Dunn Productions, Inc. – Software Engineer",
       location: "Los Angeles, CA | Feb 2025 – Present",
       bullets: [
