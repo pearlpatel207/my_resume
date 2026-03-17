@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
-import { Mail } from "lucide-react";
+import { Mail, Menu, X } from "lucide-react";
 import { projects } from "@/data/projects";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 
@@ -16,6 +16,7 @@ export default function Portfolio() {
 
   const [current, setCurrent] = useState(0);
   const [activeTab, setActiveTab] = useState("All");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   type Theme = 'sunrise' | 'day' | 'sunset' | 'night';
 
@@ -88,18 +89,48 @@ export default function Portfolio() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-sm">
         <div className="max-w-5xl mx-auto px-6 py-3 flex justify-between items-center">
           <span className="font-semibold text-amber-500">Pearl Patel</span>
-          <div className="flex gap-5 text-sm font-medium">
+
+          {/* Desktop links */}
+          <div className="hidden sm:flex gap-5 text-sm font-medium">
             {["about", "education", "experience", "projects", "publications", "contact"].map((s) => (
-              <a
-                key={s}
-                href={`#${s}`}
-                className="capitalize hover:text-amber-500 transition-colors hidden sm:inline"
-              >
+              <a key={s} href={`#${s}`} className="capitalize hover:text-amber-500 transition-colors">
                 {s}
               </a>
             ))}
           </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="sm:hidden p-1 rounded-md hover:bg-amber-100 dark:hover:bg-slate-700 transition-colors"
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
+
+        {/* Mobile dropdown */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="sm:hidden bg-white/95 dark:bg-slate-900/95 border-t border-amber-100 dark:border-slate-700 px-6 py-4 flex flex-col gap-4 text-sm font-medium"
+            >
+              {["about", "education", "experience", "projects", "publications", "contact"].map((s) => (
+                <a
+                  key={s}
+                  href={`#${s}`}
+                  className="capitalize hover:text-amber-500 transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {s}
+                </a>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* THEME TOGGLE BUTTONS

@@ -37,36 +37,41 @@ export default function ExperienceTimeline() {
         Life is a beach — here&apos;s every stop along mine 🌊
       </p>
 
-      {/* Skinny timeline — full width on desktop */}
+      {/* Skinny timeline — scrollable on mobile, full width on desktop */}
       <div className="max-w-5xl mx-auto px-8 mb-10">
-        <div className="relative">
-          {/* Line */}
-          <div className="absolute left-0 right-0 top-[7px] h-px bg-amber-200 dark:bg-slate-600" />
-          {/* Markers */}
-          <div className="relative flex justify-between">
-            {experiences.map((exp, i) => {
-              const [co, rl] = exp.title.split(" – ");
-              const isActive = i === current;
-              return (
-                <button key={i} onClick={() => goTo(i)} className="flex flex-col items-center gap-1.5 group">
-                  <div className={`rounded-full border-2 transition-all duration-200 ${
-                    isActive
-                      ? "w-3.5 h-3.5 bg-amber-500 border-amber-500"
-                      : "w-2.5 h-2.5 bg-white dark:bg-slate-800 border-amber-300 dark:border-slate-500 group-hover:border-amber-500"
-                  }`} />
-                  <span className={`text-sm font-semibold leading-tight text-center max-w-[90px] transition-colors duration-200 ${
-                    isActive ? "text-amber-500" : "text-gray-500 dark:text-gray-400 group-hover:text-gray-600"
-                  }`}>
-                    {co}
-                  </span>
-                  <span className={`text-xs leading-tight text-center max-w-[90px] transition-colors duration-200 ${
-                    isActive ? "text-amber-400" : "text-gray-400 dark:text-gray-500"
-                  }`}>
-                    {rl}
-                  </span>
-                </button>
-              );
-            })}
+        <div
+          className="overflow-x-auto"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          <div className="relative min-w-max sm:min-w-0">
+            {/* Line */}
+            <div className="absolute left-0 right-0 top-[7px] h-px bg-amber-200 dark:bg-slate-600" />
+            {/* Markers */}
+            <div className="relative flex sm:justify-between gap-10 sm:gap-0">
+              {experiences.map((exp, i) => {
+                const [co, rl] = exp.title.split(" – ");
+                const isActive = i === current;
+                return (
+                  <button key={i} onClick={() => goTo(i)} className="flex flex-col items-center gap-1.5 group flex-shrink-0">
+                    <div className={`rounded-full border-2 transition-all duration-200 ${
+                      isActive
+                        ? "w-3.5 h-3.5 bg-amber-500 border-amber-500"
+                        : "w-2.5 h-2.5 bg-white dark:bg-slate-800 border-amber-300 dark:border-slate-500 group-hover:border-amber-500"
+                    }`} />
+                    <span className={`text-sm font-semibold leading-tight text-center max-w-[90px] transition-colors duration-200 ${
+                      isActive ? "text-amber-500" : "text-gray-500 dark:text-gray-400 group-hover:text-gray-600"
+                    }`}>
+                      {co}
+                    </span>
+                    <span className={`text-xs leading-tight text-center max-w-[90px] transition-colors duration-200 ${
+                      isActive ? "text-amber-400" : "text-gray-400 dark:text-gray-500"
+                    }`}>
+                      {rl}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
